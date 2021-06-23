@@ -58,7 +58,7 @@ const BlogPost = ({ data }) => {
   const { markdownRemark: post } = data
 
   return (
-    <Layout>
+    <Layout headerImage={post.frontmatter.featuredimage}>
       <BlogPostTemplate
         content={post.html}
         contentComponent={HTMLContent}
@@ -97,6 +97,13 @@ export const pageQuery = graphql`
         title
         description
         tags
+        featuredimage {
+          childImageSharp {
+            fixed(quality: 6, width: 600, height: 300) {
+              src
+            }
+          }
+        }
       }
     }
   }
